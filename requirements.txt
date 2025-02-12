@@ -1,0 +1,18 @@
+# Core dependencies
+numpy
+pandas
+scikit-learn
+scipy
+torch>=2.5.1
+torchvision>=0.20.1
+torchaudio>=2.5.1
+fastai
+opencv-python-headless>=4.10.0
+matplotlib>=3.10.0
+
+# Optional dependencies (Comment out if not needed)
+# seaborn  # Visualization
+# jupyterlab  # Jupyter Notebook support
+# notebook  # Jupyter Notebook
+# streamlit  # Web UI
+# PyQt5  # GUI applications
