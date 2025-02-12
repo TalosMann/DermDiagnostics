@@ -6,7 +6,7 @@ import os
 from fastai.learner import load_learner
 
 # Hugging Face model URL (Replace with your actual model URL)
-MODEL_URL = "https://huggingface.co/TalosMann/DermDiagnostics/resolve/main/body_images_resnet50.pkl"
+MODEL_URL = "https://huggingface.co/TalosMann/DermDiagnostics/resolve/main/body_images_resnet50_linux.pkl"
 
 # Function to download model if not available locally
 @st.cache_resource
