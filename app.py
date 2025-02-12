@@ -4,6 +4,7 @@ import torch
 import urllib.request
 import os
 from fastai.learner import load_learner
+from pathlib import Path, PosixPath
 
 # Hugging Face model URL (Replace with your actual model URL)
 MODEL_URL = "https://huggingface.co/TalosMann/DermDiagnostics/resolve/main/body_images_resnet50_linux.pkl"
@@ -11,11 +12,21 @@ MODEL_URL = "https://huggingface.co/TalosMann/DermDiagnostics/resolve/main/body_
 # Function to download model if not available locally
 @st.cache_resource
 def load_model():
-    model_path = "body_images_resnet50.pkl"
+    model_path = "body_images_resnet50_linux.pkl"  # Ensure this matches your new model filename
+    
+    # Download model if it doesn't exist
     if not os.path.exists(model_path):
         with st.spinner("Downloading model..."):
             urllib.request.urlretrieve(MODEL_URL, model_path)
-    return load_learner(model_path)
+
+    # Load the model using PosixPath to prevent WindowsPath errors
+    learner = load_learner(PosixPath(model_path), cpu=True)
+
+    # Ensure the learner's internal path is also PosixPath
+    learner.path = PosixPath(learner.path)
+
+    return learner
+
 
 # Load the model
 model = load_model()
