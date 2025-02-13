@@ -5,6 +5,7 @@ import urllib.request
 import os
 from fastai.learner import load_learner
 from pathlib import Path, PosixPath
+from pathlib import Path, PosixPath
 
 # Hugging Face model URL (Replace with your actual model URL)
 MODEL_URL = "https://huggingface.co/TalosMann/DermDiagnostics/resolve/main/body_images_resnet50_linux.pkl"
@@ -12,21 +13,18 @@ MODEL_URL = "https://huggingface.co/TalosMann/DermDiagnostics/resolve/main/body_
 # Function to download model if not available locally
 @st.cache_resource
 def load_model():
-    model_path = "body_images_resnet50_linux.pkl"  # Ensure this matches your new model filename
+    model_path = Path("body_images_resnet50_linux.pkl")  # Use Path() to ensure compatibility
     
     # Download model if it doesn't exist
-    if not os.path.exists(model_path):
+    if not model_path.exists():
         with st.spinner("Downloading model..."):
-            urllib.request.urlretrieve(MODEL_URL, model_path)
+            urllib.request.urlretrieve(MODEL_URL, str(model_path))  # Convert path to string
 
-    # Load the model using PosixPath to prevent WindowsPath errors
+    # Ensure FastAI uses PosixPath
     learner = load_learner(PosixPath(model_path), cpu=True)
-
-    # Ensure the learner's internal path is also PosixPath
-    learner.path = PosixPath(learner.path)
+    learner.path = PosixPath(learner.path)  # Ensure internal path is PosixPath
 
     return learner
-
 
 # Load the model
 model = load_model()
