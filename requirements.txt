@@ -4,7 +4,7 @@ pandas
 scikit-learn
 scipy
 torch>=2.5.1
-torchvision>=0.20.1
+torchvision==0.10.0
 torchaudio>=2.5.1
 fastai
 opencv-python-headless>=4.10.0
