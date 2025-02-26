@@ -4,6 +4,12 @@ import torch
 import urllib.request
 from fastai.learner import load_learner
 from pathlib import Path
+import platform
+import pathlib
+
+# Fix for WindowsPath issue on Linux
+if platform.system() == "Linux":
+    pathlib.WindowsPath = pathlib.PosixPath
 
 # Hugging Face model URL (Replace with your actual model URL)
 MODEL_URL = "https://huggingface.co/TalosMann/DermDiagnostics/resolve/main/body_images_resnet50_linux.pkl"
