@@ -1,4 +1,5 @@
 # Core dependencies
+'''
 numpy
 pandas
 scikit-learn
@@ -9,6 +10,14 @@ torchaudio>=2.5.1
 fastai
 opencv-python-headless>=4.10.0
 matplotlib>=3.10.0
+'''
+
+streamlit
+torch==1.13.1
+torchvision==0.14.1
+fastai==2.7.11
+Pillow==9.5.0
+urllib3==1.26.15
 
 # Optional dependencies (Comment out if not needed)
 # seaborn  # Visualization
