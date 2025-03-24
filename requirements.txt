@@ -12,7 +12,9 @@ matplotlib
 huggingface_hub
 streamlit
 Pillow
+fasttransform
 urllib3
+
 
 # Optional dependencies (Comment out if not needed)
 # seaborn  # Visualization
