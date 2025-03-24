@@ -6,6 +6,7 @@ from fastai.learner import load_learner
 from pathlib import Path
 import platform
 import pathlib
+from huggingface_hub import hf_hub_download
 
 # Fix for WindowsPath issue on Linux
 if platform.system() == "Linux":
@@ -14,6 +15,8 @@ if platform.system() == "Linux":
 # Hugging Face model URL (Replace with your actual model URL)
 MODEL_URL = "https://huggingface.co/TalosMann/DermDiagnostics/resolve/main/body_images_resnet50_linux.pkl"
 MODEL_FILENAME = "body_images_resnet50_linux.pkl"
+REPO_ID = "TalosMann/DermDiagnostics"
+
 
 # Function to download model if not available locally
 @st.cache_resource
@@ -27,9 +30,11 @@ def load_model():
 
     # Load the model using fastai's load_learner
     try:
-        learner = load_learner(model_path, cpu=True)
-        st.success("Model loaded successfully!")
-        return learner
+        with st.spinner("Loading model from Hugging Face Hub..."):
+            model_path = hf_hub_download(repo_id=REPO_ID, filename=MODEL_FILENAME)
+            learner = load_learner(model_path, cpu=True)
+            st.success("Model loaded successfully!")
+            return learner
     except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
