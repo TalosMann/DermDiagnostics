@@ -9,7 +9,7 @@ torchaudio
 fastai
 opencv-python-headless
 matplotlib
-
+huggingface_hub
 streamlit
 Pillow
 urllib3
